@@ -1,32 +1,560 @@
+/* ==========================================================================
+   Design tokens
+   To re-theme the whole page, edit the five raw palette colors below.
+   Everything else references these through the semantic roles underneath.
+   ========================================================================== */
+
+:root {
+    /* Raw palette */
+    --dusty-grape: hsla(265, 32%, 44%, 1);
+    --raspberry: hsla(348, 73%, 49%, 1);
+    --onyx: hsla(84, 17%, 6%, 1);
+    --amber-earth: hsla(33, 83%, 50%, 1);
+    --turquoise: hsla(176, 100%, 41%, 1);
+
+    /* Surfaces */
+    --color-bg: var(--onyx);
+    --color-surface: hsla(84, 14%, 10%, 1);
+    --color-surface-raised: hsla(84, 13%, 13%, 1);
+    --color-border: hsla(70, 8%, 24%, 1);
+
+    /* Text */
+    --color-text: hsla(60, 14%, 93%, 1);
+    --color-text-muted: hsla(60, 6%, 66%, 1);
+    --color-text-faint: hsla(60, 5%, 46%, 1);
+
+    /* Accents -- one per major section, cycled in reading order */
+    --color-accent-primary: var(--turquoise);
+    --color-accent-secondary: var(--amber-earth);
+    --color-accent-tertiary: var(--raspberry);
+    --color-accent-quaternary: var(--dusty-grape);
+
+    /* Type */
+    --font-display: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
+    --font-body: "Roboto", sans-serif;
+
+    /* Layout */
+    --page-max-width: 880px;
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+}
+
+/* ==========================================================================
+   Reset & base
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 html {
-    font-family: "Roboto", sans-serif;
+    font-family: var(--font-body);
+    color-scheme: dark;
 }
 
 body {
+    margin: 0;
+    background-color: var(--color-bg);
+    background-image:
+        radial-gradient(
+            circle at 15% 0%,
+            hsla(176, 100%, 41%, 0.06),
+            transparent 40%
+        ),
+        radial-gradient(
+            circle at 100% 20%,
+            hsla(33, 83%, 50%, 0.05),
+            transparent 45%
+        );
+    color: var(--color-text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
 }
+
+h1,
+h2,
+h3,
+h4 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--color-text);
+}
+
+p {
+    margin: 0;
+}
+
+ul,
+ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+a {
+    color: inherit;
+}
+
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--color-accent-primary);
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+/* ==========================================================================
+   Page shell
+   ========================================================================== */
+
+.page {
+    max-width: var(--page-max-width);
+    margin: 0 auto;
+    padding: 3rem 1.5rem 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
+}
+
+/* ==========================================================================
+   Section scaffolding
+   Every content section gets a numbered, color-coded eyebrow that maps to
+   one of the four accents -- a small nod to the status-panel styling of the
+   monitoring dashboards (Grafana/Kibana) this CV's subject builds for a
+   living.
+   ========================================================================== */
+
+.panel_eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-bottom: 0.85rem;
+}
+
+.panel_eyebrow .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: currentColor;
+    box-shadow: 0 0 0 3px hsla(0, 0%, 100%, 0.06);
+    flex-shrink: 0;
+}
+
+[data-accent="primary"] .panel_eyebrow {
+    color: var(--color-accent-primary);
+}
+
+[data-accent="secondary"] .panel_eyebrow {
+    color: var(--color-accent-secondary);
+}
+
+[data-accent="tertiary"] .panel_eyebrow {
+    color: var(--color-accent-tertiary);
+}
+
+[data-accent="quaternary"] .panel_eyebrow {
+    color: var(--color-accent-quaternary);
+}
+
+[data-accent] > h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.25rem;
+}
+
+/* ==========================================================================
+   Hero / header_about
+   ========================================================================== */
 
 .header_about {
     display: flex;
-    gap: 1rem;
-    padding: 1rem;
+    align-items: center;
+    gap: 2.5rem;
+    padding: 2.5rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: linear-gradient(
+        165deg,
+        var(--color-surface) 0%,
+        var(--color-bg) 100%
+    );
 }
 
-.header_about .image_wrapper {
-    width: 300px;
-    height: 300px;
-    margin-left: auto;
-    overflow: hidden;
-    border-radius: 1rem;
+.header_about-text h1 {
+    font-size: 2.25rem;
+    margin-bottom: 0.6rem;
 }
 
-.header_about img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 20%;
+.header_about-text h2 {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 1.05rem;
+    color: var(--color-text-muted);
+    margin-bottom: 1.4rem;
+    letter-spacing: 0;
+}
+
+.header_about-text p {
+    font-size: 0.95rem;
+}
+
+.header_about-text p + p {
+    margin-top: 0.4rem;
 }
 
 .header_about p a {
-    color: #595959;
+    color: var(--color-text-muted);
     text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition:
+        color 0.15s ease,
+        border-color 0.15s ease;
+}
+
+.header_about p a:hover {
+    color: var(--color-accent-primary);
+    border-bottom-color: var(--color-accent-primary);
+}
+
+.header_about .image_wrapper {
+    width: 176px;
+    height: 176px;
+    margin-left: auto;
+    flex-shrink: 0;
+    border-radius: 50%;
+    padding: 4px;
+    background: conic-gradient(
+        from 200deg,
+        var(--color-accent-primary),
+        var(--color-accent-secondary),
+        var(--color-accent-tertiary),
+        var(--color-accent-quaternary),
+        var(--color-accent-primary)
+    );
+    overflow: hidden;
+}
+
+.header_about .image_wrapper img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center 20%;
+    border-radius: 50%;
+    border: 4px solid var(--color-bg);
+}
+
+/* ==========================================================================
+   About
+   ========================================================================== */
+
+.header_profile p {
+    max-width: 65ch;
+    color: var(--color-text-muted);
+    font-size: 1rem;
+}
+
+/* ==========================================================================
+   Notable skills
+   ========================================================================== */
+
+.skills_grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.skill_card {
+    border: 1px solid var(--color-border);
+    border-left: 3px solid var(--card-accent, var(--color-accent-secondary));
+    background: var(--color-surface);
+    border-radius: var(--radius-md);
+    padding: 1.1rem 1.25rem;
+}
+
+.skill_card > .skill_card-title {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 0.65rem;
+}
+
+.skill_card-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.skill_card-list li {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    padding-left: 0.9rem;
+    position: relative;
+}
+
+.skill_card-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--card-accent, var(--color-accent-secondary));
+}
+
+.skill_card-list .skill_card-list {
+    margin-top: 0.35rem;
+    margin-left: 0.3rem;
+    gap: 0.3rem;
+}
+
+/* Cycle the four accents across the skill cards */
+.skill_card:nth-of-type(4n + 1) {
+    --card-accent: var(--color-accent-primary);
+}
+.skill_card:nth-of-type(4n + 2) {
+    --card-accent: var(--color-accent-secondary);
+}
+.skill_card:nth-of-type(4n + 3) {
+    --card-accent: var(--color-accent-tertiary);
+}
+.skill_card:nth-of-type(4n + 4) {
+    --card-accent: var(--color-accent-quaternary);
+}
+
+/* ==========================================================================
+   Experience overview
+   ========================================================================== */
+
+.role_card {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    padding: 1.5rem 1.75rem;
+}
+
+.role_header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.5rem 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.role_header h3 {
+    font-size: 1.15rem;
+}
+
+.role_header h4 {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+}
+
+.role_period {
+    margin-left: auto;
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    color: var(--color-accent-tertiary);
+    background: hsla(348, 73%, 49%, 0.12);
+    border: 1px solid hsla(348, 73%, 49%, 0.35);
+    border-radius: 999px;
+    padding: 0.2rem 0.7rem;
+}
+
+.role_duties {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.role_duties > li {
+    padding-left: 1.1rem;
+    position: relative;
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+}
+
+.role_duties > li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: var(--color-accent-tertiary);
+}
+
+.role_duties ul {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.role_duties ul li {
+    padding-left: 1rem;
+    font-size: 0.88rem;
+    color: var(--color-text-faint);
+    position: relative;
+}
+
+.role_duties ul li::before {
+    content: "–";
+    position: absolute;
+    left: 0;
+    color: var(--color-text-faint);
+}
+
+/* ==========================================================================
+   Projects
+   ========================================================================== */
+
+.projects_list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.project_card {
+    border: 1px solid var(--color-border);
+    border-top: 3px solid var(--color-accent-quaternary);
+    background: var(--color-surface);
+    border-radius: var(--radius-md);
+    padding: 1.5rem 1.75rem;
+}
+
+.project_card h3 {
+    font-size: 1.1rem;
+    color: var(--color-accent-quaternary);
+    margin-bottom: 0.6rem;
+}
+
+.project_card p {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+    max-width: 65ch;
+    margin-bottom: 1.1rem;
+}
+
+.project_card h4 {
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-faint);
+    margin-bottom: 0.6rem;
+}
+
+.tech_pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tech_pills li {
+    font-family: var(--font-display);
+    font-size: 0.78rem;
+    color: var(--color-text);
+    background: var(--color-surface-raised);
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    padding: 0.3rem 0.8rem;
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media (max-width: 640px) {
+    .page {
+        padding: 2rem 1.1rem 3rem;
+        gap: 2.5rem;
+    }
+
+    .header_about {
+        flex-direction: column-reverse;
+        text-align: center;
+        padding: 2rem 1.5rem;
+    }
+
+    .header_about .image_wrapper {
+        margin: 0 auto;
+    }
+
+    .role_period {
+        margin-left: 0;
+    }
+
+    .skills_grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==========================================================================
+   Print
+   The dashboard-dark theme is great on screen but wastes ink and prints
+   unpredictably (browsers vary on whether they honor background colors), so
+   print gets a light, ink-friendly palette. Cards/sections are also kept
+   from splitting mid-block across page breaks.
+   ========================================================================== */
+
+@media print {
+    @page {
+        margin: 1.4cm;
+    }
+
+    /* Force the browser to actually print background colors/gradients --
+     without this, most browsers drop them by default regardless of the
+     "Background graphics" checkbox in the print dialog. Turning that
+     checkbox ON is still required for this to take effect. */
+    * {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        color-adjust: exact;
+    }
+
+    .page {
+        max-width: 100%;
+        padding: 1rem 0;
+        gap: 1.4rem;
+    }
+
+    /* Keep each panel's heading attached to its content, and keep the
+     panel itself from being cut across a page boundary where possible. */
+    .header_about,
+    .header_profile,
+    .notable_skills,
+    .experience_overview,
+    .experience_detail,
+    .role_card,
+    .skill_card,
+    .project_card {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+
+    h2,
+    h3,
+    h4,
+    .panel_eyebrow {
+        break-after: avoid;
+        page-break-after: avoid;
+    }
 }
