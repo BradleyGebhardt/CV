@@ -426,30 +426,45 @@ button:focus-visible {
    Projects
    ========================================================================== */
 
-.projects_list {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
+.projects_grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.1rem;
+    align-items: start;
 }
 
 .project_card {
     border: 1px solid var(--color-border);
-    border-top: 3px solid var(--color-accent-quaternary);
+    border-top: 3px solid var(--card-accent, var(--color-accent-quaternary));
     background: var(--color-surface);
     border-radius: var(--radius-md);
     padding: 1.5rem 1.75rem;
+    height: 100%;
+}
+
+/* Cycle the four accents across the highlight cards */
+.project_card:nth-of-type(4n + 1) {
+    --card-accent: var(--color-accent-primary);
+}
+.project_card:nth-of-type(4n + 2) {
+    --card-accent: var(--color-accent-secondary);
+}
+.project_card:nth-of-type(4n + 3) {
+    --card-accent: var(--color-accent-tertiary);
+}
+.project_card:nth-of-type(4n + 4) {
+    --card-accent: var(--color-accent-quaternary);
 }
 
 .project_card h3 {
     font-size: 1.1rem;
-    color: var(--color-accent-quaternary);
+    color: var(--card-accent, var(--color-accent-quaternary));
     margin-bottom: 0.6rem;
 }
 
 .project_card p {
     color: var(--color-text-muted);
     font-size: 0.95rem;
-    max-width: 65ch;
     margin-bottom: 1.1rem;
 }
 
@@ -502,7 +517,8 @@ button:focus-visible {
         margin-left: 0;
     }
 
-    .skills_grid {
+    .skills_grid,
+    .projects_grid {
         grid-template-columns: 1fr;
     }
 }

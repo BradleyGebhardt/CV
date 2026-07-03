@@ -70,7 +70,8 @@
           and network management systems. Experienced across Python, Vue.js,
           Django, Flask, Linux infrastructure, networking, and observability
           platforms. Passionate about building reliable software that simplifies
-          operational workflows and scales to real-world deployments.
+          operational workflows and supports real-world infrastructure
+          deployments.
         </p>
       </section>
 
@@ -85,7 +86,8 @@
             <span class="skill_card-title">Full-Stack Web Development</span>
             <ul class="skill_card-list">
               <li>Vue 2/3</li>
-              <li>NuxtJS</li>
+              <li>Nuxt.js</li>
+              <li>Jinja Templating</li>
             </ul>
           </li>
 
@@ -130,10 +132,10 @@
             >
             <ul class="skill_card-list">
               <li>Linux Server Management</li>
-              <li>Mikrotik Networking</li>
+              <li>MikroTik Networking</li>
               <li>Linux Networking</li>
               <li>OpenMPTCP router for network bonding</li>
-              <li>Mikrotik Ethernet over IP for remote tunneling</li>
+              <li>MikroTik Ethernet over IP for remote tunneling</li>
               <li>Creation of OpenVPN networks</li>
             </ul>
           </li>
@@ -144,6 +146,7 @@
               <li>Grafana</li>
               <li>Sentry</li>
               <li>Kibana and Elasticsearch</li>
+              <li>Rsyslog</li>
             </ul>
           </li>
         </ul>
@@ -164,19 +167,23 @@
 
           <ul class="role_duties">
             <li>
-              Built internal tooling in Python to manage onsite network
-              infrastructure, providing a portable wired and wireless network
-              for clients
+              Designed and developed internal Python applications used to manage
+              portable wired and wireless network infrastructure deployed at
+              client sites.
               <ul>
                 <li>Collected network stats</li>
                 <li>Monitored network health</li>
                 <li>Enabled remote management of the network</li>
+                <li>
+                  Implemented centralised remote log collection to simplify
+                  troubleshooting and reduce time spent diagnosing field issues.
+                </li>
               </ul>
             </li>
 
             <li>
-              Built internal dashboards used both for managing the kit and for
-              reporting on events to clients
+              Developed operational dashboards used for internal equipment
+              management and client reporting.
             </li>
           </ul>
         </div>
@@ -184,17 +191,55 @@
 
       <section class="experience_detail" data-accent="quaternary">
         <p class="panel_eyebrow">
-          <span class="dot" aria-hidden="true"></span>04 / Projects
+          <span class="dot" aria-hidden="true"></span>04 / Highlights
         </p>
-        <h2>Two Projects to Highlight</h2>
+        <h2>Projects &amp; Highlights</h2>
 
-        <ol class="projects_list">
+        <ul class="projects_grid">
+          <li class="project_card">
+            <h3>SAICA Final Board Exams Network</h3>
+
+            <p>
+              Designed and deployed a VLAN-segmented MikroTik network to provide
+              connectivity for SAICA's final board exams, serving roughly 4,000
+              concurrent users across multiple exam halls from a single uplink
+              device. Each hall ran a daisy-chained ring topology, so a single
+              device failure would fail over automatically instead of taking the
+              hall offline.
+            </p>
+
+            <h4>Technologies used</h4>
+            <ul class="tech_pills">
+              <li>MikroTik Networking</li>
+              <li>VLAN Segmentation</li>
+              <li>Redundant Ring Topology</li>
+            </ul>
+          </li>
+
+          <li class="project_card">
+            <h3>Kruger National Park Remote Recovery</h3>
+
+            <p>
+              Diagnosed a failed SSD stuck in read-only mode on a remote site
+              device in Kruger National Park. Used MikroTik Ethernet over IP to
+              stand up a temporary virtual replacement on our server, keeping
+              Wi-Fi analytics collection running until a replacement SSD could
+              be physically installed on site.
+            </p>
+
+            <h4>Technologies used</h4>
+            <ul class="tech_pills">
+              <li>MikroTik Ethernet over IP</li>
+              <li>Remote Troubleshooting</li>
+            </ul>
+          </li>
+
           <li class="project_card">
             <h3>sendit.media</h3>
 
             <p>
               A streaming and conference platform built during our pivot in
-              Covid, aimed at helping companies bring their physical events
+              COVID-19, aimed at helping companies bring their physical events
               online during the lockdowns.
             </p>
 
@@ -202,7 +247,7 @@
             <ul class="tech_pills">
               <li>NuxtJS with static rendering for the frontend</li>
               <li>Django for the backend</li>
-              <li>Payfast for the payment gateway</li>
+              <li>PayFast for the payment gateway</li>
               <li>FFmpeg for stream encoding and restreaming</li>
             </ul>
           </li>
@@ -219,11 +264,11 @@
             <ul class="tech_pills">
               <li>Vue 3 for the frontend</li>
               <li>Flask for the backend</li>
-              <li>Payfast for the payment gateway</li>
+              <li>PayFast for the payment gateway</li>
               <li>Nightsbridge integration</li>
             </ul>
           </li>
-        </ol>
+        </ul>
       </section>
     </div>
   </body>
