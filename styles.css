@@ -552,13 +552,23 @@ button:focus-visible {
         gap: 1.4rem;
     }
 
-    /* Keep each panel's heading attached to its content, and keep the
-     panel itself from being cut across a page boundary where possible. */
+    /* Single-column for print: a 2-up grid with an odd number of cards
+     leaves a lone card in its own row, which is more likely to spill onto
+     a fresh page and waste the space left on the page before it. Stacking
+     lets cards flow and fill each page top-to-bottom instead. */
+    .skills_grid,
+    .projects_grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Keep each panel's heading attached to its content, and keep
+     individual cards from being cut mid-content across a page boundary.
+     Note: the section wrappers themselves (.notable_skills,
+     .experience_detail, etc.) are deliberately NOT in this list -- forcing
+     a whole multi-card section to stay together pushes it entirely onto
+     the next page rather than letting it flow, which is what caused a
+     single trailing card to land alone on its own page. */
     .header_about,
-    .header_profile,
-    .notable_skills,
-    .experience_overview,
-    .experience_detail,
     .role_card,
     .skill_card,
     .project_card {
